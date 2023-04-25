@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1.0/sign")
@@ -23,13 +24,13 @@ public class DisigSignController extends BaseController {
     private final DigitalSignatureService digitalSignatureService;
 
     @PostMapping(path = "/file", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<ApiResponse> signFile(@RequestPart SignFileRequest request, @RequestPart MultipartFile file) throws IOException, DisigException, NoSuchAlgorithmException {
-        return getOkResponse(digitalSignatureService.signRelayFile(file.getInputStream(), request.getCid(), request.getSigners()));
+    public ResponseEntity<ApiResponse> signFile(@RequestPart(value = "cid", required = false) String cid, @RequestPart(value = "signers") List<String> signers, @RequestPart(value = "file") MultipartFile file) throws IOException, DisigException, NoSuchAlgorithmException {
+        return getOkResponse(digitalSignatureService.signRelayFile(file.getInputStream(), cid, signers));
     }
 
     @PostMapping("/string")
     public ResponseEntity<ApiResponse> signString(@RequestBody SignStringRequest request) throws DisigException, NoSuchAlgorithmException, JsonProcessingException {
-        return getOkResponse(digitalSignatureService.signRelayString(request.getPayloadString(), request.getCid(),request.getSigners()));
+        return getOkResponse(digitalSignatureService.signRelayString(request.getPayloadString(), request.getCid(), request.getSigners()));
     }
 
     @PostMapping("/hash")
