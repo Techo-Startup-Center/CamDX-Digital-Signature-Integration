@@ -121,7 +121,7 @@ public class DigitalSignatureImpl implements DigitalSignatureService {
                         new Bytes32(getRandomSalt())));
         Map<String, Object> requestBody = getRelayRequestBody(encodedData);
         Map<String, Object> rawRespond = HttpRequester.requestToServer(constructRequestUrl(approveEndpoint, ""), HttpMethod.POST, objectMapper.writeValueAsString(requestBody));
-        return objectMapper.readValue(objectMapper.writeValueAsString(rawRespond), TransactionReceipt.class);
+        return objectMapper.readValue(objectMapper.writeValueAsString(rawRespond.get("data")), TransactionReceipt.class);
     }
     private TransactionReceipt revoke(byte[] encodeHash) throws NoSuchAlgorithmException, JsonProcessingException, DisigException {
         String encodedData = TypeEncoder.encode(
@@ -129,20 +129,24 @@ public class DigitalSignatureImpl implements DigitalSignatureService {
                 new Bytes32(getRandomSalt())));
         Map<String, Object> requestBody = getRelayRequestBody(encodedData);
         Map<String, Object> rawRespond = HttpRequester.requestToServer(constructRequestUrl(revokeEndpoint, ""), HttpMethod.POST, objectMapper.writeValueAsString(requestBody));
-        return objectMapper.readValue(objectMapper.writeValueAsString(rawRespond), TransactionReceipt.class);
+        return objectMapper.readValue(objectMapper.writeValueAsString(rawRespond.get("data")), TransactionReceipt.class);
     }
 
     private TransactionReceipt sign(byte[] encodeHash, String cid, List<String> signers) throws NoSuchAlgorithmException, DisigException, JsonProcessingException {
         byte[] cidBytes = processCidToBytes(cid);
+        List<Address> addresses = new ArrayList<>();
+        for (String add : signers){
+            addresses.add(new Address(add));
+        }
         String encodedData = TypeEncoder.encode(
                 new DynamicStruct(new Bytes32(encodeHash),
                         new Bytes32(getRandomSalt()),
                         new Bytes4(Arrays.copyOfRange(cidBytes, 0, 4)),
                         new Bytes32(Arrays.copyOfRange(cidBytes, 4, cidBytes.length)),
-                        new DynamicArray(Address.class, signers)));
+                        new DynamicArray(Address.class, addresses)));
         Map<String, Object> requestBody = getRelayRequestBody(encodedData);
         Map<String, Object> rawRespond = HttpRequester.requestToServer(constructRequestUrl(signEndpoint, ""), HttpMethod.POST, objectMapper.writeValueAsString(requestBody));
-        return objectMapper.readValue(objectMapper.writeValueAsString(rawRespond), TransactionReceipt.class);
+        return objectMapper.readValue(objectMapper.writeValueAsString(rawRespond.get("data")), TransactionReceipt.class);
     }
 
     private Map<String, Object> getRelayRequestBody(String encodedData) {
@@ -173,6 +177,8 @@ public class DigitalSignatureImpl implements DigitalSignatureService {
     }
 
     private byte[] processCidToBytes(String cid) throws DisigException {
+        if (ObjectUtils.isEmpty(cid))
+            return new byte[36];
         String rawCid = cid.substring(1);
         byte[] cidBytes = Base58.decode(rawCid);
         if (cidBytes.length != 36)

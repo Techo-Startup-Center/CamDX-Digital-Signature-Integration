@@ -1,9 +1,11 @@
 package kh.gov.camdx.disig.lib.dto;
 
+import lombok.Data;
 import org.web3j.protocol.core.methods.response.Log;
 
 import java.util.List;
 
+@Data
 public class TransactionReceipt {
     private String transactionHash;
     private String transactionIndex;
