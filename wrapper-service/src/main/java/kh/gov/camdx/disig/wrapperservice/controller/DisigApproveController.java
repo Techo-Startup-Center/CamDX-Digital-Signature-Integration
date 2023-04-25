@@ -26,16 +26,16 @@ public class DisigApproveController extends BaseController {
 
     @PostMapping(path = "/file", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<ApiResponse> signFile(@RequestPart(value = "file") MultipartFile file) throws IOException, DisigException, NoSuchAlgorithmException {
-        return getOkResponse(digitalSignatureService.revokeRelayFile(file.getInputStream()));
+        return getOkResponse(digitalSignatureService.approveRelayFile(file.getInputStream()));
     }
 
     @PostMapping("/string")
     public ResponseEntity<ApiResponse> signString(@RequestBody StringRequest request) throws DisigException, NoSuchAlgorithmException, JsonProcessingException {
-        return getOkResponse(digitalSignatureService.revokeRelayString(request.getPayloadString()));
+        return getOkResponse(digitalSignatureService.approveRelayString(request.getPayloadString()));
     }
 
     @PostMapping("/hash")
     public ResponseEntity<ApiResponse> signHash(@RequestBody HashRequest request) throws DisigException, NoSuchAlgorithmException, JsonProcessingException {
-        return getOkResponse(digitalSignatureService.revokeRelayHash(request.getHashHex()));
+        return getOkResponse(digitalSignatureService.approveRelayHash(request.getHashHex()));
     }
 }
