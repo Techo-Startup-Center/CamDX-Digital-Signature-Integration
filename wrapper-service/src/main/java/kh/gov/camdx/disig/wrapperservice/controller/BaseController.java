@@ -2,7 +2,6 @@ package kh.gov.camdx.disig.wrapperservice.controller;
 
 import kh.gov.camdx.disig.lib.dto.ApiResponse;
 import org.springframework.http.ResponseEntity;
-import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
 public class BaseController {
     public BaseController() {
