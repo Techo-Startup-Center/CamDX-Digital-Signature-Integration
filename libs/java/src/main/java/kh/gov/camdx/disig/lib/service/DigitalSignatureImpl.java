@@ -3,6 +3,7 @@ package kh.gov.camdx.disig.lib.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kh.gov.camdx.disig.lib.dto.SignerResponse;
+import kh.gov.camdx.disig.lib.dto.TransactionReceipt;
 import kh.gov.camdx.disig.lib.exceptions.DisigException;
 import kh.gov.camdx.disig.lib.utility.Base58;
 import kh.gov.camdx.disig.lib.utility.HttpRequester;
@@ -19,7 +20,7 @@ import org.web3j.abi.datatypes.generated.Bytes4;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.ECKeyPair;
 import org.web3j.crypto.Sign;
-import org.web3j.protocol.core.methods.response.TransactionReceipt;
+
 import org.web3j.utils.Numeric;
 
 import java.io.IOException;
@@ -31,7 +32,7 @@ import java.util.*;
 
 @Component
 public class DigitalSignatureImpl implements DigitalSignatureService {
-    private final String verifyEndpoint = "/api/v1.0/verify/";
+    private final String verifyEndpoint = "/api/v1.0/verify";
     private final String signEndpoint = "/api/v1.0/sign";
     private final String revokeEndpoint = "/api/v1.0/revoke";
     private final String approveEndpoint = "/api/v1.0/approve";
@@ -61,18 +62,18 @@ public class DigitalSignatureImpl implements DigitalSignatureService {
     }
 
     @Override
-    public TransactionReceipt signRelayFile(InputStream inputStream, String cid, List<String> addresses) throws IOException, NoSuchAlgorithmException, DisigException {
-        return sign(getHashFromFile(inputStream), cid, addresses);
+    public TransactionReceipt signRelayFile(InputStream inputStream, String cid, List<String> signers) throws IOException, NoSuchAlgorithmException, DisigException {
+        return sign(getHashFromFile(inputStream), cid, signers);
     }
 
     @Override
-    public TransactionReceipt signRelayHash(String hashHexEncode, String cid, List<String> addresses) throws DisigException, NoSuchAlgorithmException, JsonProcessingException {
-        return sign(Numeric.hexStringToByteArray(hashHexEncode),cid,addresses);
+    public TransactionReceipt signRelayHash(String hashHexEncode, String cid, List<String> signers) throws DisigException, NoSuchAlgorithmException, JsonProcessingException {
+        return sign(Numeric.hexStringToByteArray(hashHexEncode),cid,signers);
     }
 
     @Override
-    public TransactionReceipt signRelayString(String inputString, String cid, List<String> addresses) throws NoSuchAlgorithmException, DisigException, JsonProcessingException {
-        return sign(getHashFromString(inputString), cid, addresses);
+    public TransactionReceipt signRelayString(String inputString, String cid, List<String> signers) throws NoSuchAlgorithmException, DisigException, JsonProcessingException {
+        return sign(getHashFromString(inputString), cid, signers);
     }
 
     @Override
@@ -131,14 +132,14 @@ public class DigitalSignatureImpl implements DigitalSignatureService {
         return objectMapper.readValue(objectMapper.writeValueAsString(rawRespond), TransactionReceipt.class);
     }
 
-    private TransactionReceipt sign(byte[] encodeHash, String cid, List<String> addresses) throws NoSuchAlgorithmException, DisigException, JsonProcessingException {
+    private TransactionReceipt sign(byte[] encodeHash, String cid, List<String> signers) throws NoSuchAlgorithmException, DisigException, JsonProcessingException {
         byte[] cidBytes = processCidToBytes(cid);
         String encodedData = TypeEncoder.encode(
                 new DynamicStruct(new Bytes32(encodeHash),
                         new Bytes32(getRandomSalt()),
                         new Bytes4(Arrays.copyOfRange(cidBytes, 0, 4)),
                         new Bytes32(Arrays.copyOfRange(cidBytes, 4, cidBytes.length)),
-                        new DynamicArray(Address.class, addresses)));
+                        new DynamicArray(Address.class, signers)));
         Map<String, Object> requestBody = getRelayRequestBody(encodedData);
         Map<String, Object> rawRespond = HttpRequester.requestToServer(constructRequestUrl(signEndpoint, ""), HttpMethod.POST, objectMapper.writeValueAsString(requestBody));
         return objectMapper.readValue(objectMapper.writeValueAsString(rawRespond), TransactionReceipt.class);
