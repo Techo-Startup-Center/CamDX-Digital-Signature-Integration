@@ -3,6 +3,7 @@ theme:
   name: material
   features:
     # - navigation.tabs
+    - navigation.indexes
     - navigation.sections
     - toc.integrate
     - navigation.top
@@ -35,7 +36,7 @@ nav:
   - 'How to' :
     - 'registration.md'
     - 'Integration' :
-      - 'integration.md'
+      - integration/index.md
       - 'svc.md'
       - 'SDK':
         - 'java-sdk.md'

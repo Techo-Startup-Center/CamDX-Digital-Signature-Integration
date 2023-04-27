@@ -1,4 +1,4 @@
-# Integration Mode
+# Integration
 
 <!-- ## API
 
