@@ -1,6 +1,6 @@
-# Integration
+# Integration Mode
 
-## API
+<!-- ## API
 
 ### Setup
 ### Sign
@@ -9,4 +9,4 @@
 ## SDK
 
 ### Java
-### Node
+### Node -->

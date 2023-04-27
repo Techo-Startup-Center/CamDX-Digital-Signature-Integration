@@ -7,18 +7,7 @@ Digital Signature Platform is a platform for companies or government organizatio
   <figcaption>Document Issuance and Verification Process</figcaption>
 </figure>
 
-This platform is built remove the complexity of integrating information system directly to the blockchain itself and replace it with a simple to integrate service yet feature rich web API. The platform allows those organisation to performs digital content (files, digital payload or transactions) issuances at the same time enable the verification process to identifies issuers and approver of those contents without exposing content of those digital file or transactions to third party. 
-
-## Privacy
-By the use of hashing algoritm, organisation could issue any digital content on the platform without the need of exposing the whole file itself to the public through the nature of one way function of hashing algorithm. 
-<figure markdown>
-  ![Image title](img/hashing_algorithm.png){ width="510"}
-  <a href="https://www.okta.com/identity-101/hashing-algorithms/" target="_blank">Hashing Algorithm Overview: Types, Methodologies & Usage
-  </a>
-</figure>
-
-
-
+This platform is built  to remove the complexity of integrating the information system directly to the blockchain network itself and replace it with a simple to integrate service yet feature rich web API. The platform allows those organisations to perform digital content (files, digital payload or transactions) issuances at the same time enable the verification process to identifies issuers and approver of those contents without exposing digital file or transactions to third party. 
 
 
 <!-- <div class="grid cards" markdown>

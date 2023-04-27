@@ -26,9 +26,20 @@ theme:
     #   primary: teal
     #   accent: lime
 nav:
-  - 'index.md'
-  - 'registration.md'
-  - 'integration.md'
+  - 'Introduction' : 'index.md'
+  - 'How it works':
+    - 'CamDL' : 'camdl.md'
+    - 'privacy.md'
+    - 'contract.md'
+    - 'pki.md'
+  - 'How to' :
+    - 'registration.md'
+    - 'Integration' :
+      - 'integration.md'
+      - 'svc.md'
+      - 'SDK':
+        - 'java-sdk.md'
+        - 'node-sdk.md'
 extra:
   social:
     - icon: fontawesome/brands/github-alt
