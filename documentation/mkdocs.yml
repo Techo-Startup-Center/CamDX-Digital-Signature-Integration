@@ -2,7 +2,7 @@ site_name: Digital Signature Documentation
 theme:
   name: material
   features:
-    - navigation.tabs
+    # - navigation.tabs
     - navigation.sections
     - toc.integrate
     - navigation.top
@@ -14,21 +14,32 @@ theme:
   language: en
   palette:
     - scheme: default
-      toggle:
-        icon: material/toggle-switch-off-outline 
-        name: Switch to dark mode
+      # toggle:
+      #   icon: material/toggle-switch-off-outline 
+      #   name: Switch to dark mode
       primary: teal
       accent: purple 
-    - scheme: slate 
-      toggle:
-        icon: material/toggle-switch
-        name: Switch to light mode    
-      primary: teal
-      accent: lime
+    # - scheme: slate 
+    #   toggle:
+    #     icon: material/toggle-switch
+    #     name: Switch to light mode    
+    #   primary: teal
+    #   accent: lime
 nav:
-  - 'index.md'
-  - 'registration.md'
-  - 'integration.md'
+  - 'Introduction' : 'index.md'
+  - 'How it works':
+    - 'CamDL' : 'camdl.md'
+    - 'privacy.md'
+    - 'contract.md'
+    - 'pki.md'
+  - 'How to' :
+    - 'registration.md'
+    - 'Integration' :
+      - 'integration.md'
+      - 'svc.md'
+      - 'SDK':
+        - 'java-sdk.md'
+        - 'node-sdk.md'
 extra:
   social:
     - icon: fontawesome/brands/github-alt
@@ -67,3 +78,5 @@ extra:
       link: https://www.facebook.com/Techo.Startup.Center
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/company/techo-startup-center/
+  intro:
+    okta-hash: https://www.okta.com/identity-101/hashing-algorithms/
