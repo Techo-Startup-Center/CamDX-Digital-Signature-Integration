@@ -31,8 +31,8 @@ nav:
   - 'How it works':
     - 'CamDL' : 'camdl.md'
     - 'privacy.md'
-    - 'contract.md'
-    - 'pki.md'
+    # - 'contract.md'
+    # - 'pki.md'
   - 'How to' :
     - 'registration.md'
     - 'Integration' :
@@ -41,6 +41,7 @@ nav:
       - 'SDK':
         - 'java-sdk.md'
         - 'node-sdk.md'
+      - 'contract-integrate.md'
 extra:
   social:
     - icon: fontawesome/brands/github-alt
