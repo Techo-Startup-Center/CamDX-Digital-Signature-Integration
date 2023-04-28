@@ -1,8 +1,16 @@
-# CamDL Digital Signature
+# Introduction
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nunc congue nisi vitae suscipit tellus. 
+Digital Signature Platform is a platform for companies or government organizations to certify or verify any digital contents by the use of blockchain technology. 
 
-<div class="grid cards" markdown>
+<figure markdown>
+  ![Image title](img/doc_verification.png){ width="510"}
+  <figcaption>Document Issuance and Verification Process</figcaption>
+</figure>
+
+This platform is built  to remove the complexity of integrating the information system directly to the blockchain network itself and replace it with a simple to integrate service yet feature rich web API. The platform allows those organisations to perform digital content (files, digital payload or transactions) issuances at the same time enable the verification process to identifies issuers and approver of those contents without exposing digital file or transactions to third party. 
+
+
+<!-- <div class="grid cards" markdown>
 
 - :fontawesome-brands-html5: __HTML__ for content and structure
 - :fontawesome-brands-js: __JavaScript__ for interactivity
@@ -24,4 +32,4 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
     mkdocs.yml    # The configuration file.
     docs/
         index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+        ...       # Other markdown pages, images and other files. -->
