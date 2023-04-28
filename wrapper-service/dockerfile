@@ -1,0 +1,20 @@
+FROM maven:3.9.1-amazoncorretto-17 AS builder
+
+RUN mkdir -p workspace
+WORKDIR /workspace
+
+COPY ./wrapper-service .
+COPY ./libs/java/releases/disig-lib-1.0.0.jar /workspace/disig-lib-1.0.0.jar
+
+RUN mvn install:install-file -Dfile=/workspace/disig-lib-1.0.0.jar -DgroupId=kh.gov.camdx.disig -DartifactId=disig-lib -Dversion=1.0.0 -Dpackaging=jar -DgeneratePom=true
+
+ARG profile
+RUN echo $profile
+RUN mvn -DskipTests=true clean install package
+
+FROM amazoncorretto:17-alpine3.17 AS workspace
+
+RUN mkdir -p workspace
+COPY --from=builder /workspace/target/wrapper-service-*.jar /workspace/app.jar
+
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/urandom","-jar","/workspace/app.jar"]

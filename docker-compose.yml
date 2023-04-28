@@ -1,0 +1,16 @@
+version: "3.6"
+services:
+  disig-wrapper-service:
+    image: disig-wrapper
+    build:
+      context: .
+      dockerfile: ./wrapper-service/dockerfile
+    restart: always
+    ports: 
+      - "8081:8080"
+    environment:
+      - server.port=8080
+      - spring.servlet.multipart.max-file-size=4GB
+      - spring.servlet.multipart.max-request-size=4GB
+      - camdx.disig.server-url=<URL FOR DISIG PLATFORM - DEV or PROD>
+      - camdx.disig.private-key=<YOUR PRIVATE KEY>
