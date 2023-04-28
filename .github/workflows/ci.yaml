@@ -11,6 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
+        working-directory: ./documentation
         with:
           python-version: 3.x
       - uses: actions/cache@v2
@@ -18,4 +19,6 @@ jobs:
           key: ${{ github.ref }}
           path: .cache
       - run: pip install mkdocs-material 
+        working-directory: ./documentation
       - run: mkdocs gh-deploy --force
+        working-directory: ./documentation
