@@ -6,7 +6,7 @@ Before integrating with CamDX Digital Signature with your current system. You ne
 
 As of now, CamDX Digital Signature only support Eliptic Curve algorithm using curve secp256k1. Therefore, it's important to generate a private using the supported EC curves, which you do archive using the following command:
 
-```
+```bash
 openssl ecparam -name secp256k1 -genkey | openssl ec -out private.key
 ```
 
@@ -16,7 +16,7 @@ The command above uses OpenSSL to generate a private key file name **private.key
 
 After you've generated a private key, it will be used to create Certificate Signing Request, which will be done using the following command:
 
-```
+```bash
 openssl req -out certificate_signing_req.csr -key private.key -new
 ```
 
@@ -38,10 +38,11 @@ Upon entering this command, you will be asked to complete your organization info
 
 After creating a CSR successfully, you will need to submit it manually to Digital Signature Adminstrations to get a valid certificate, which you can use for signing and verifying your transaction.
 
+<h2 id="extract-key"></h2>
 ## Extract private key from PEM format
 
 There is one more step final being fully ready to use our Digital Signature System. We need to extract private key from the **key** we've generated above. Here's the following command to archive that:
 
-```
+```bash
 openssl pkey -in private.key -text | sed -n '/priv:/,/pub:/p' | sed -e '1d;$d' | tr -d ':'| tr -d ' ' | tr -d '\n' && echo
 ```
