@@ -1,24 +1,27 @@
-name: ci 
+name: ci
+
 on:
   push:
     branches:
       - docs
+
 permissions:
   contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
+      - name: Copy mkdocs.yml
+        run: cp documentation/mkdocs.yml .
       - uses: actions/setup-python@v4
-        working-directory: ./documentation
         with:
           python-version: 3.x
       - uses: actions/cache@v2
         with:
           key: ${{ github.ref }}
           path: .cache
-      - run: pip install mkdocs-material 
-        working-directory: ./documentation
+      - run: pip install mkdocs-material
       - run: mkdocs gh-deploy --force
-        working-directory: ./documentation
