@@ -28,11 +28,6 @@ theme:
     #   accent: lime
 nav:
   - 'Introduction' : 'index.md'
-  - 'How it works':
-    - 'CamDL' : 'camdl.md'
-    - 'privacy.md'
-    # - 'contract.md'
-    # - 'pki.md'
   - 'How to' :
     - 'registration.md'
     - 'Integration' :
@@ -42,6 +37,11 @@ nav:
         - 'java-sdk.md'
         - 'node-sdk.md'
       - 'contract-integrate.md'
+  - 'Reference':
+    - 'CamDL' : 'camdl.md'
+    - 'privacy.md'
+    # - 'contract.md'
+    # - 'pki.md'
 extra:
   social:
     - icon: fontawesome/brands/github-alt

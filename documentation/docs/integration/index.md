@@ -4,7 +4,7 @@ There are 3 mode of integration organisation are able to choose to connect with 
 
 ### [Wrapper service](svc.md)
 
-This wrapper service abstract all implementations and make it easy for organisations to integrate with digital signature with less modification over the existing systems or knowledge of blockchain technology. This is offered in the form of docker image for developer to host as a separate docker container service along side their existing service, which can be interacted through API call to perform actions related with digital signature.
+This wrapper service abstracts all implementations and make it easy for organisations to integrate with digital signature with less modification over the existing systems, programing language and framework independent or knowledge of blockchain technology. This is offered in the form of docker image for developer to host as a separate docker container service along side their existing service, which can be interacted through API call to perform actions related with digital signature.
 
 ### [SDK](sdk.md)
 
