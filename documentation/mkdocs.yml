@@ -33,7 +33,8 @@ nav:
     - 'Integration' :
       - integration/index.md
       - 'svc.md'
-      - 'SDK':
+      - "SDK" :
+        - 'sdk/index.md'
         - 'java-sdk.md'
         - 'node-sdk.md'
       - 'contract-integrate.md'

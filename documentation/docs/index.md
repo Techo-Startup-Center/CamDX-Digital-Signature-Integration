@@ -1,12 +1,10 @@
 # Introduction
 
 Digital Signature Platform is a platform for companies or government organizations to certify or verify any digital contents by the use of blockchain technology. 
-
 <figure markdown>
-  ![Image title](img/doc_verification.png){ width="510"}
-  <figcaption>Document Issuance and Verification Process</figcaption>
+  ![Image title](img/disig_flow.png){ width="510"}
+  <figcaption>Digital Content Issuance and Verification Process</figcaption>
 </figure>
-
 This platform is built  to remove the complexity of integrating the information system directly to the blockchain network itself and replace it with a simple to integrate service yet feature rich web API. The platform allows those organisations to perform digital content (files, digital payload or transactions) issuances at the same time enable the verification process to identifies issuers and approver of those contents without exposing digital file or transactions to third party. 
 
 
