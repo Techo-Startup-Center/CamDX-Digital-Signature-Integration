@@ -25,7 +25,7 @@ public class DisigApproveController extends BaseController {
     private final DigitalSignatureService digitalSignatureService;
 
     @PostMapping(path = "/file", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<ApiResponse> signFile(@RequestPart(value = "file") MultipartFile file) throws IOException, DisigException, NoSuchAlgorithmException {
+    public ResponseEntity<ApiResponse> signFile(@RequestParam(value = "file") MultipartFile file) throws IOException, DisigException, NoSuchAlgorithmException {
         return getOkResponse(digitalSignatureService.approveRelayFile(file.getInputStream()));
     }
 
